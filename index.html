@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar y soltar divs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="izquierda">
+        <div id="botones">
+            <div class="opciones" id="rectangulo" draggable="true">Rectangulo</div>
+            <div class="opciones" id="Separador-Horizontal" draggable="true">Separador</div>
+            <div class="opciones" id="divisor-horizontal" draggable="true">divisor</div>
+            <div class="opciones" id="Filas" draggable="true">Filas</div>
+            <div class="opciones" id="Texto" draggable="true">Texto</div>
+            <div id="dragDiv" class="opciones" draggable="true">imagen</div>
+        </div>
+    </div>
+    <div class='derecha' id="derecha">
+        Arrastra y suelta aquí
+        <div id="imagenContainer"></div>
+        <div id="textoMostrado"></div>
+    </div>
+
+    
+    <script src="./index.js"></script>
+</body>
+</html>

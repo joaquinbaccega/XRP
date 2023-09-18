@@ -1,0 +1,95 @@
+body {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
+
+#botones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Divide en 2 columnas de igual tamaño */
+}
+#izquierda {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+#derecha {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+#Texto {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 10px;
+}
+#dragDiv {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 10px;
+}
+#rectangulo-dibujar {
+  width: 100px;
+  height: 100px;
+  background-color: #e74c3c;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  display: none;
+}
+
+#Filas {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#divisor-horizontal {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#rectangulo {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#Separador-Horizontal {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 10px;
+}
