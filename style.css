@@ -3,7 +3,13 @@ body {
   height: 100vh;
   margin: 0;
 }
-
+.derecha.hover{
+  background-color: orange;
+}
+#miDiv{
+  width: 700px;
+  height: 10px;
+}
 #botones {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Divide en 2 columnas de igual tamaño */

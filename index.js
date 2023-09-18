@@ -6,19 +6,28 @@ const imagenContainer = document.getElementById("imagenContainer");
 const dragDiv = document.getElementById("dragDiv");
 const objeto = document.getElementById("botones");
 
+let titilando = false;
+let intervalo;
+
 izquierda.addEventListener("dragstart", (e) => {
   e.dataTransfer.setData("id", e.target.id);
-  e.dataTransfer.setData("text", e.target.id);
+  crearDiv()
 });
+
 derecha.addEventListener("dragover", (e) => {
   e.preventDefault();
   e.target.classList.add('hover')
 });
 
-derecha.addEventListener("dragleave", (e) => {});
+derecha.addEventListener("dragleave", (e) => {
+  e.target.classList.remove('hover') 
+  detenerTitilacion();
+});
+
 derecha.addEventListener("drop", (e) => {
   const id = e.dataTransfer.getData("id");
   const dragElement = document.getElementById(e.dataTransfer.getData("text"));
+  e.target.classList.remove('hover')
   console.log(id);
   e.target.appendChild(document.getElementById(id));
 
@@ -81,6 +90,49 @@ derecha.addEventListener("drop", (e) => {
     div.style.display = "none";
   }
 });
+
+function alternarTitilacion() {
+  const miDiv = document.getElementById("miDiv"); // Obtener referencia al div
+  if (titilando) {
+    miDiv.style.backgroundColor = "#ccc";
+    miDiv.style.color = "#333";
+  } else {
+    miDiv.style.backgroundColor = "#f0f0f0";
+    miDiv.style.color = "#ff5733";
+  }
+  titilando = !titilando;
+}
+
+function crearDiv() {
+  const div = document.createElement("div");
+  div.style.width = "200px";
+  div.style.height = "100px";
+  div.style.backgroundColor = "#3498db";
+  div.style.left = "20px";
+  div.style.top = "20px";
+  div.style.display = "flex";
+  div.style.flexWrap = "wrap";
+  div.style.justifyContent = "space-between";
+  div.style.alignItems = "center";
+  div.setAttribute("draggable", "true");
+  div.setAttribute("id", "rectangulo");
+  div.setAttribute("class", "opciones");
+  div.setAttribute("ondragstart", "drag(event)");
+  contenedorDerecha.appendChild(div);
+
+  // Iniciar la titilación cuando se crea el div
+  if (!intervalo) {
+    intervalo = setInterval(alternarTitilacion(), 1000); // Cambiar cada segundo
+  }
+}
+function detenerTitilacion() {
+  clearInterval(intervalo);
+  const miDiv = document.getElementById("miDiv"); // Obtener referencia al div
+  miDiv.style.backgroundColor = "#ccc"; // Restablecer el estilo normal
+  miDiv.style.color = "#333";
+  intervalo = null;
+}
+
 function crearRectangulo(contenedor, ancho, alto, color) {
   // Crear un nuevo elemento div
   const rectangulo = document.createElement("div");
@@ -95,6 +147,7 @@ function crearRectangulo(contenedor, ancho, alto, color) {
   contenedor.appendChild(rectangulo);
   return rectangulo; // Devolver el elemento div creado
 }
+
 function crearRectanguloDividido(contenedor) {
   const rectangulo = document.createElement("div");
   rectangulo.style.width = "auto";
@@ -111,6 +164,7 @@ function crearRectanguloDividido(contenedor) {
     const cuadrado = crearRectangulo(rectangulo, 90, 90, "#e74c3c");
   }
 }
+
 function crearSeparadorHorizontal() {
   const separador = document.createElement("div");
   separador.style.width = "100%";
