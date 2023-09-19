@@ -3,10 +3,10 @@ body {
   height: 100vh;
   margin: 0;
 }
-.derecha.hover{
+.derecha.hover {
   background-color: orange;
 }
-#miDiv{
+#miDiv {
   width: 700px;
   height: 10px;
 }
@@ -26,6 +26,22 @@ body {
   padding: 20px;
   border: 1px solid #ccc;
 }
+@keyframes titilar {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+#Titilacion:hover{
+  animation: titilar 2s ease-in-out infinite;
+}
+
 #Texto {
   width: 100px;
   height: 100px;

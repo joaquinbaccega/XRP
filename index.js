@@ -11,127 +11,85 @@ let intervalo;
 
 izquierda.addEventListener("dragstart", (e) => {
   e.dataTransfer.setData("id", e.target.id);
-  crearDiv()
+  e.dataTransfer.setData("text", e.target.id);
+  crearDiv();
 });
 
 derecha.addEventListener("dragover", (e) => {
   e.preventDefault();
-  e.target.classList.add('hover')
+  e.target.classList.add("hover");
 });
 
 derecha.addEventListener("dragleave", (e) => {
-  e.target.classList.remove('hover') 
+  e.target.classList.remove("hover");
   detenerTitilacion();
 });
 
 derecha.addEventListener("drop", (e) => {
+  e.preventDefault();
   const id = e.dataTransfer.getData("id");
   const dragElement = document.getElementById(e.dataTransfer.getData("text"));
-  e.target.classList.remove('hover')
+
+  e.target.classList.remove("hover");
+
   console.log(id);
+
   e.target.appendChild(document.getElementById(id));
 
   if (id === "rectangulo") {
     const miRectangulo = crearRectangulo(contenedorDerecha, 200, 100, "#3498db");
     const div = document.getElementById(id);
     div.style.display = "none";
-
   } else if (id === "Separador-Horizontal") {
     const miSeparador = crearSeparadorHorizontal();
     const div = document.getElementById(id);
     div.style.display = "none";
-
   } else if (id === "divisor-horizontal") {
     const miRectangulo = crearRectangulo(contenedorDerecha, "auto", 7, "#3498db");
     const div = document.getElementById(id);
     div.style.display = "none";
-
   } else if (id === "Filas") {
     crearRectanguloDividido(contenedorDerecha);
     const div = document.getElementById(id);
     div.style.display = "none";
-
-  } else if (dragElement === dragDiv) {
-    if (dragElement === dragDiv) {
-        // Abrir el cuadro de diálogo para cargar una imagen
-        const inputImagen = document.createElement("input");
-        inputImagen.type = "file";
-        inputImagen.accept = "image/*";
-        inputImagen.click();
-
-        // Manejar la carga de la imagen seleccionada
-        inputImagen.addEventListener("change", function () {
-            const file = inputImagen.files[0];
-
-            // Verificar si el archivo es una imagen
-            if (file && file.type.startsWith("image/")) {
-                // Crear un objeto URL para la imagen
-                const imageURL = URL.createObjectURL(file);
-
-                // Crear un elemento de imagen
-                const imagen = document.createElement("img");
-                imagen.src = imageURL;
-                imagen.style.maxWidth = "100%"; // Máximo ancho
-                imagen.style.maxHeight = "100%"; // Máxima altura
-                // Limpiar el contenedor de imagen y agregar la nueva imagen
-                imagenContainer.innerHTML = "";
-                imagenContainer.appendChild(imagen);
-            } else {
-                alert("Por favor, selecciona una imagen válida.");
-            }
-        });
-    }
+  } else if (id === "Texto") {
+    agregarTexto();
     const div = document.getElementById(id);
     div.style.display = "none";
-  }
-  else if(id === "Texto"){
-    agregarTexto();
+  } else if (dragElement === dragDiv) {
+    const inputImagen = document.createElement("input");
+    inputImagen.type = "file";
+    inputImagen.accept = "image/*";
+    inputImagen.click();
+
+    // Manejar la carga de la imagen seleccionada
+    inputImagen.addEventListener("change", function () {
+      const file = inputImagen.files[0];
+
+      // Verificar si el archivo es una imagen
+      if (file && file.type.startsWith("image/")) {
+        // Crear un objeto URL para la imagen
+        const imageURL = URL.createObjectURL(file);
+
+        // Crear un elemento de imagen
+        const imagen = document.createElement("img");
+        imagen.id = "Titilacion";
+        imagen.src = imageURL;
+
+        imagen.style.maxWidth = "100%"; // Máximo ancho
+        imagen.style.maxHeight = "100%"; // Máxima altura
+
+        // Limpiar el contenedor de imagen y agregar la nueva imagen
+        imagenContainer.innerHTML = "";
+        imagenContainer.appendChild(imagen);
+      } else {
+        alert("Por favor, selecciona una imagen válida.");
+      }
+    });
     const div = document.getElementById(id);
     div.style.display = "none";
   }
 });
-
-function alternarTitilacion() {
-  const miDiv = document.getElementById("miDiv"); // Obtener referencia al div
-  if (titilando) {
-    miDiv.style.backgroundColor = "#ccc";
-    miDiv.style.color = "#333";
-  } else {
-    miDiv.style.backgroundColor = "#f0f0f0";
-    miDiv.style.color = "#ff5733";
-  }
-  titilando = !titilando;
-}
-
-function crearDiv() {
-  const div = document.createElement("div");
-  div.style.width = "200px";
-  div.style.height = "100px";
-  div.style.backgroundColor = "#3498db";
-  div.style.left = "20px";
-  div.style.top = "20px";
-  div.style.display = "flex";
-  div.style.flexWrap = "wrap";
-  div.style.justifyContent = "space-between";
-  div.style.alignItems = "center";
-  div.setAttribute("draggable", "true");
-  div.setAttribute("id", "rectangulo");
-  div.setAttribute("class", "opciones");
-  div.setAttribute("ondragstart", "drag(event)");
-  contenedorDerecha.appendChild(div);
-
-  // Iniciar la titilación cuando se crea el div
-  if (!intervalo) {
-    intervalo = setInterval(alternarTitilacion(), 1000); // Cambiar cada segundo
-  }
-}
-function detenerTitilacion() {
-  clearInterval(intervalo);
-  const miDiv = document.getElementById("miDiv"); // Obtener referencia al div
-  miDiv.style.backgroundColor = "#ccc"; // Restablecer el estilo normal
-  miDiv.style.color = "#333";
-  intervalo = null;
-}
 
 function crearRectangulo(contenedor, ancho, alto, color) {
   // Crear un nuevo elemento div
@@ -139,8 +97,7 @@ function crearRectangulo(contenedor, ancho, alto, color) {
   // Establecer el ancho y alto del rectángulo
   rectangulo.style.width = ancho + "px";
   rectangulo.style.height = alto + "px";
-
-  rectangulo.className = 'opciones'
+  rectangulo.id = "Titilacion";
   // Establecer el color de fondo del rectángulo
   rectangulo.style.backgroundColor = color;
   // Agregar el rectángulo al contenedor especificado
@@ -150,6 +107,7 @@ function crearRectangulo(contenedor, ancho, alto, color) {
 
 function crearRectanguloDividido(contenedor) {
   const rectangulo = document.createElement("div");
+  rectangulo.id = "Titilacion";
   rectangulo.style.width = "auto";
   rectangulo.style.height = "200px";
   rectangulo.style.backgroundColor = "#3498db";
@@ -167,6 +125,7 @@ function crearRectanguloDividido(contenedor) {
 
 function crearSeparadorHorizontal() {
   const separador = document.createElement("div");
+  separador.id = "Titilacion";
   separador.style.width = "100%";
   separador.style.height = "7px";
   separador.style.backgroundColor = "white";
@@ -182,6 +141,7 @@ function crearSeparadorHorizontal() {
 
 function agregarTexto() {
   const texto = document.createElement("input");
+  texto.id = "Titilacion";
   texto.style.width = "auto";
   texto.style.height = "auto";
   texto.style.backgroundColor = "white";
